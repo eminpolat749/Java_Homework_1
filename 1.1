@@ -1,0 +1,49 @@
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		PrintSortedTest.run();		
+	}
+}
+
+class PrintSortedTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("3 sayı giriniz:");
+		int a = kb.nextInt();
+		int b = kb.nextInt();
+		int c = kb.nextInt();
+		
+		NumberUtil.printSorted(a, b, c);		
+	}
+}
+
+class NumberUtil {
+	public static void printSorted(int a, int b, int c)
+	{
+		int min = a, max = a, sum;
+		sum = a + b + c;
+		
+		if (b < min && b < c)
+			min = b;
+		else if (c < min && c < b)
+			min = c;
+		
+		if (b > max && b > c)
+			max = b;
+		else if (c > max && c > b)
+			max = c;		
+		
+		if (a == b && b == c)
+			System.out.printf("%d = %d = %d%n", min, sum - (min + max), max);	
+		else if (a == b && b != c)
+			System.out.printf("%d = %d < %d%n", min, sum - (min + max), max);
+		else if (a != b && b == c)
+			System.out.printf("%d < %d = %d%n", min, sum - (min + max), max);
+		else
+			System.out.printf("%d < %d < %d%n", min, sum - (min + max), max);
+	}	
+}
