@@ -3,11 +3,11 @@ package csd;
 class App {
 	public static void main(String [] args)
 	{
-		PrintSortedTest.run();		
+		PrintRelationsApp.run();		
 	}
 }
 
-class PrintSortedTest {
+class PrintRelationsApp {
 	public static void run()
 	{
 		java.util.Scanner kb = new java.util.Scanner(System.in);
@@ -17,33 +17,23 @@ class PrintSortedTest {
 		int b = kb.nextInt();
 		int c = kb.nextInt();
 		
-		NumberUtil.printSorted(a, b, c);		
+		printRelations(a, b, c);		
+	}
+	public static void printRelations(int a, int b, int c)
+	{
+		int min = Math.min(Math.min(a, b), c);
+		int max = Math.max(Math.max(a, b), c);
+		int mid = a + b + c - min - max;
+		
+		if (min < mid)
+			System.out.printf("%d < %d ", min, mid);
+		else
+			System.out.printf("%d = %d ", min, mid);
+		
+		if (mid < max)
+			System.out.printf("< %d%n", max);
+		else
+			System.out.printf("= %d%n", max);		
 	}
 }
 
-class NumberUtil {
-	public static void printSorted(int a, int b, int c)
-	{
-		int min = a, max = a, sum;
-		sum = a + b + c;
-		
-		if (b < min && b < c)
-			min = b;
-		else if (c < min && c < b)
-			min = c;
-		
-		if (b > max && b > c)
-			max = b;
-		else if (c > max && c > b)
-			max = c;		
-		
-		if (a == b && b == c)
-			System.out.printf("%d = %d = %d%n", min, sum - (min + max), max);	
-		else if (a == b && b != c)
-			System.out.printf("%d = %d < %d%n", min, sum - (min + max), max);
-		else if (a != b && b == c)
-			System.out.printf("%d < %d = %d%n", min, sum - (min + max), max);
-		else
-			System.out.printf("%d < %d < %d%n", min, sum - (min + max), max);
-	}	
-}
